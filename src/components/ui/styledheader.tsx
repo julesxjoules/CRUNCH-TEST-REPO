@@ -14,9 +14,14 @@ export const TypingHeading = styled.h2<{ $isInput?: boolean, $showCursor?: boole
   overflow: hidden;
   border-right: ${({ $showCursor }) => ($showCursor ? '0.15em solid black' : 'none')};
   animation: ${typing} 2s steps(40, end);
-  color: ${({ $isInput }) => ($isInput ? 'grey' : 'black')}; // Conditional color based on input state
+  color: ${({ $isInput }) => ($isInput ? 'grey' : 'black')}; /* Conditional color based on input state */
+  
+  width: 100%; /* Make sure it occupies the full width */
+  max-width: 100vw; /* Ensure it stretches across the viewport */
+  margin: 0 auto; /* Center the heading */
+
   &::before {
-    content: ${({ $isInput }) => ($isInput ? '"> "' : '""')}; // Add ">" only for user input
+    content: ${({ $isInput }) => ($isInput ? '"> "' : '""')}; /* Add ">" only for user input */
   }
 
   @media (max-width: 768px) {

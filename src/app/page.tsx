@@ -19,11 +19,12 @@ const OuterContainer = styled.div`
 `;
 
 const HeaderSection = styled.header`
-  width: 100%;
+  width: 100vw; /* Set to the full width of the viewport */
   position: sticky;
   top: 0;
   background-color: transparent;
   z-index: 10;
+  box-sizing: border-box;
 `;
 
 const HeaderContent = styled.div`
@@ -32,6 +33,7 @@ const HeaderContent = styled.div`
   justify-content: space-between;
   padding: 1vh 2vw;
   width: 100%;
+  max-width: 100vw; /* Ensure content also stretches to full width */
   box-sizing: border-box;
   transition: padding 0.3s ease;
 
@@ -48,17 +50,9 @@ const HeaderBodyDivider = styled.div`
   height: 2px;
   background-color: lightgrey;
   border-radius: 1px;
-  width: calc(100% - 4vw);
+  width: 100%;
   margin: 0 auto;
   flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    width: calc(100% - 8vw);
-  }
-
-  @media (max-width: 480px) {
-    width: calc(100% - 12vw);
-  }
 `;
 
 const MainContainer = styled.div`
@@ -120,9 +114,9 @@ const LineGroup = styled.div`
   gap: 0.5rem;
 `;
 
-const Line = styled.div<{ $thickness: number }>`  /* Changed to use transient prop */
+const Line = styled.div<{ thickness: number }>`
   width: 100px;
-  height: ${({ $thickness }) => $thickness}px;
+  height: ${({ thickness }) => thickness}px;
   background-color: grey;
 `;
 
@@ -162,19 +156,17 @@ const Home: React.FC = () => {
   return (
     <OuterContainer>
       <HeaderSection>
-        <ContentWrapper>
-          <HeaderContent>
-            <LeftSection>
-              <PastTopicsDropdown topics={pastTopics} />
-            </LeftSection>
-            <CenterSection>
-              <Logo />
-            </CenterSection>
-            <RightSection>
-              <UserMenu options={userOptions} />
-            </RightSection>
-          </HeaderContent>
-        </ContentWrapper>
+        <HeaderContent>
+          <LeftSection>
+            <PastTopicsDropdown topics={pastTopics} />
+          </LeftSection>
+          <CenterSection>
+            <Logo />
+          </CenterSection>
+          <RightSection>
+            <UserMenu options={userOptions} />
+          </RightSection>
+        </HeaderContent>
         <HeaderBodyDivider />
       </HeaderSection>
       <MainContainer>
@@ -189,7 +181,7 @@ const Home: React.FC = () => {
                   onChange={handleInputChange}
                   onKeyPress={handleInputSubmit}
                   placeholder="Enter a topic"
-                  $isVisible={true}  /* Updated to use transient prop */
+                  $isVisible={true} // Updated to use transient prop
                 />
                 {inputValue && <ClearInputButton onClick={handleClear}>✖</ClearInputButton>}
               </InputContainer>
@@ -198,9 +190,9 @@ const Home: React.FC = () => {
             </MainBodyContainer>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
               <LineGroup>
-                <Line $thickness={2} />  {/* Updated to use transient prop */}
-                <Line $thickness={4} />
-                <Line $thickness={6} />
+                <Line thickness={2} />
+                <Line thickness={4} />
+                <Line thickness={6} />
               </LineGroup>
               <SentenceGroup>
                 <Sentence fontSize={14}>This is a small sentence.</Sentence>
