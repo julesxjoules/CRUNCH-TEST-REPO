@@ -22,7 +22,11 @@ const LogoContainer = styled.div`
   }
 `;
 
-const Logo: React.FC = () => {
+interface LogoProps {
+  $isHighlighted?: boolean; // Example transient prop
+}
+
+const Logo: React.FC<LogoProps> = () => {
   return <LogoContainer />;
 };
 

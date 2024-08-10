@@ -7,7 +7,7 @@ const levitate = keyframes`
   100% { transform: translateY(0); }
 `;
 
-const BubbleContainer = styled.div`
+const BubbleContainer = styled.div<{ $style?: React.CSSProperties }>`
   animation: ${levitate} 3s ease-in-out infinite;
   display: flex;
   justify-content: center;
@@ -19,6 +19,7 @@ const BubbleContainer = styled.div`
   border-radius: 50%;
   background-color: #f0f0f0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  ${({ $style }) => $style && { ...$style }}; /* Apply transient style prop */
 `;
 
 const BubbleText = styled.div`
@@ -35,7 +36,7 @@ interface BubbleProps {
 
 const Bubble: React.FC<BubbleProps> = ({ text, style }) => {
   return (
-    <BubbleContainer style={style}>
+    <BubbleContainer $style={style}>
       <BubbleText>{text}</BubbleText>
     </BubbleContainer>
   );

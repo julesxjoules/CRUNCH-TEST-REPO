@@ -12,8 +12,8 @@ export const InputContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const StyledInput = styled.input<{ isVisible?: boolean }>`
-  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+export const StyledInput = styled.input<{ $isVisible?: boolean }>`
+  display: ${({ $isVisible }) => ($isVisible ? 'block' : 'none')};
   flex-grow: 1;
   border: none; // Remove border
   background-color: transparent; // Match container background

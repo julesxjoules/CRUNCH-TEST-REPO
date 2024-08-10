@@ -42,15 +42,16 @@ const appear = keyframes`
   }
 `;
 
-const DropdownContent = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+// Updated DropdownContent to use transient props (prefixing with $)
+const DropdownContent = styled.div<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 200px;
   border-radius: 10px;
-  animation: ${({ isOpen }) => (isOpen ? appear : 'none')} 0.3s ease-out;
+  animation: ${({ $isOpen }) => ($isOpen ? appear : 'none')} 0.3s ease-out;
 `;
 
 const TopicItem = styled.div`
@@ -95,7 +96,7 @@ const PastTopicsDropdown: React.FC<PastTopicsDropdownProps> = ({ topics }) => {
         Past Topics
         <TriangleIcon />
       </DropdownButton>
-      <DropdownContent isOpen={isOpen}>
+      <DropdownContent $isOpen={isOpen}>
         {topics.map((topic, index) => (
           <TopicItem key={index}>{topic}</TopicItem>
         ))}

@@ -1,4 +1,3 @@
-// components/ui/clearButton.tsx
 import React from 'react';
 import styled from 'styled-components';
 
@@ -20,9 +19,11 @@ const StyledButton = styled.button`
 
 interface ClearButtonProps {
   onClick: () => void;
+  $isOpen?: boolean; // Transient prop
+  $isVisible?: boolean; // Transient prop
 }
 
-const ClearButton: React.FC<ClearButtonProps> = ({ onClick }) => {
+const ClearButton: React.FC<ClearButtonProps> = ({ onClick, $isOpen, $isVisible }) => {
   return (
     <StyledButton onClick={onClick}>
       Clear

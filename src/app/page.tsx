@@ -120,9 +120,9 @@ const LineGroup = styled.div`
   gap: 0.5rem;
 `;
 
-const Line = styled.div<{ thickness: number }>`
+const Line = styled.div<{ $thickness: number }>`  /* Changed to use transient prop */
   width: 100px;
-  height: ${({ thickness }) => thickness}px;
+  height: ${({ $thickness }) => $thickness}px;
   background-color: grey;
 `;
 
@@ -189,7 +189,7 @@ const Home: React.FC = () => {
                   onChange={handleInputChange}
                   onKeyPress={handleInputSubmit}
                   placeholder="Enter a topic"
-                  isVisible={true}
+                  $isVisible={true}  /* Updated to use transient prop */
                 />
                 {inputValue && <ClearInputButton onClick={handleClear}>✖</ClearInputButton>}
               </InputContainer>
@@ -198,9 +198,9 @@ const Home: React.FC = () => {
             </MainBodyContainer>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
               <LineGroup>
-                <Line thickness={2} />
-                <Line thickness={4} />
-                <Line thickness={6} />
+                <Line $thickness={2} />  {/* Updated to use transient prop */}
+                <Line $thickness={4} />
+                <Line $thickness={6} />
               </LineGroup>
               <SentenceGroup>
                 <Sentence fontSize={14}>This is a small sentence.</Sentence>

@@ -28,8 +28,9 @@ const appear = keyframes`
   }
 `;
 
-const DropdownContent = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+// Updated DropdownContent to use transient props (prefixing with $)
+const DropdownContent = styled.div<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
   right: 0;
   background-color: white;
@@ -37,7 +38,7 @@ const DropdownContent = styled.div<{ isOpen: boolean }>`
   z-index: 1;
   width: 200px;
   border-radius: 10px;
-  animation: ${({ isOpen }) => (isOpen ? appear : 'none')} 0.3s ease-out;
+  animation: ${({ $isOpen }) => ($isOpen ? appear : 'none')} 0.3s ease-out;
   overflow: hidden;
 `;
 
@@ -82,7 +83,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ options }) => {
       <DropdownButton onClick={toggleDropdown}>
         User
       </DropdownButton>
-      <DropdownContent isOpen={isOpen}>
+      <DropdownContent $isOpen={isOpen}>
         {options.map((option, index) => (
           <OptionItem key={index}>{option}</OptionItem>
         ))}
