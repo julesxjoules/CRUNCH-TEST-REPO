@@ -15,6 +15,23 @@ const DropdownButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) { /* Adjust the width as needed */
+    font-size: 0; /* Hide the text by making the font size 0 */
+  }
+`;
+
+const ProfileCircle = styled.div`
+  display: none; /* Hidden by default */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: grey; /* Placeholder color */
+  
+  @media (max-width: 768px) { /* Show the circle when the screen width is below a certain threshold */
+    display: inline-block;
+    margin-left: 8px;
+  }
 `;
 
 const appear = keyframes`
@@ -28,7 +45,6 @@ const appear = keyframes`
   }
 `;
 
-// Updated DropdownContent to use transient props (prefixing with $)
 const DropdownContent = styled.div<{ $isOpen: boolean }>`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
@@ -82,6 +98,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ options }) => {
     <DropdownContainer ref={dropdownRef}>
       <DropdownButton onClick={toggleDropdown}>
         User
+        <ProfileCircle /> {/* Circle that shows up when zoomed in */}
       </DropdownButton>
       <DropdownContent $isOpen={isOpen}>
         {options.map((option, index) => (

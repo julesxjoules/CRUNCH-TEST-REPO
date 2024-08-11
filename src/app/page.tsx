@@ -19,23 +19,28 @@ const OuterContainer = styled.div`
 `;
 
 const HeaderSection = styled.header`
-  width: 100vw; /* Set to the full width of the viewport */
+  width: 100vw; /* Full width of the viewport */
   position: sticky;
   top: 0;
-  background-color: transparent;
+  background-color: white; /* Background color set back to white */
   z-index: 10;
   box-sizing: border-box;
+  padding: 1rem 0; /* Base padding to provide thickness */
+  height: auto; /* Automatically adjust the height based on content */
+  display: flex;
+  align-items: center; /* Ensure content is vertically centered */
 `;
 
 const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1vh 2vw;
   width: 100%;
-  max-width: 100vw; /* Ensure content also stretches to full width */
+  max-width: 100vw;
+  padding: 1vh 2vw;
   box-sizing: border-box;
   transition: padding 0.3s ease;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 2vh 4vw;
@@ -46,13 +51,38 @@ const HeaderContent = styled.div`
   }
 `;
 
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const CenterSection = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem; /* Added padding for the logo */
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Ensure the right section is aligned to the right */
+`;
+
 const HeaderBodyDivider = styled.div`
   height: 2px;
   background-color: lightgrey;
   border-radius: 1px;
-  width: 100%;
+  width: calc(100% - 35px); /* Adjusted to maintain gap from the edges */
   margin: 0 auto;
-  flex-shrink: 0;
+  position: absolute;
+  bottom: 0; /* Ensure the line sticks to the bottom of the header */
+  left: 17.5px; /* Ensure the line starts where the content starts */
+  right: 17.5px; /* Ensure the line ends where the content ends */
 `;
 
 const MainContainer = styled.div`
@@ -88,23 +118,6 @@ const MainBodyContainer = styled.div`
   width: 100%;
   height: auto;
   gap: 1rem;
-`;
-
-const LeftSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const CenterSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-`;
-
-const RightSection = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 const LineGroup = styled.div`
@@ -153,6 +166,11 @@ const Home: React.FC = () => {
     setInputValue('');
   };
 
+  const handleLogoClick = () => {
+    setPastTopics([]); // Clear past topics
+    window.location.reload(); // Refresh the page
+  };
+
   return (
     <OuterContainer>
       <HeaderSection>
@@ -161,7 +179,7 @@ const Home: React.FC = () => {
             <PastTopicsDropdown topics={pastTopics} />
           </LeftSection>
           <CenterSection>
-            <Logo />
+            <Logo/> {/* Added onClick to Logo */}
           </CenterSection>
           <RightSection>
             <UserMenu options={userOptions} />
@@ -181,7 +199,7 @@ const Home: React.FC = () => {
                   onChange={handleInputChange}
                   onKeyPress={handleInputSubmit}
                   placeholder="Enter a topic"
-                  $isVisible={true} // Updated to use transient prop
+                  $isVisible={true}
                 />
                 {inputValue && <ClearInputButton onClick={handleClear}>✖</ClearInputButton>}
               </InputContainer>

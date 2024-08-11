@@ -7,12 +7,10 @@ const LogoContainer = styled.div`
   text-align: center;
   margin: 0;
   padding: 0;
+  cursor: pointer; // Make the logo appear clickable
 
   @media (max-width: 600px) {
-    font-size: 18px; // Adjust font size for smaller screens
-    &::after {
-      content: "BC";
-    }
+    display: none; // Hide the logo when the screen width is 600px or less
   }
 
   @media (min-width: 601px) {
@@ -22,12 +20,13 @@ const LogoContainer = styled.div`
   }
 `;
 
-interface LogoProps {
-  $isHighlighted?: boolean; // Example transient prop
-}
+const Logo: React.FC = () => {
+  const handleLogoClick = () => {
+    localStorage.removeItem('pastTopics'); // Clear the past topics from local storage
+    window.location.reload(); // Refresh the page
+  };
 
-const Logo: React.FC<LogoProps> = () => {
-  return <LogoContainer />;
+  return <LogoContainer onClick={handleLogoClick} />;
 };
 
 export default Logo;

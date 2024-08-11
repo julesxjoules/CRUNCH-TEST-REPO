@@ -17,18 +17,16 @@ const DropdownButton = styled.button`
   align-items: center;
 `;
 
-const TriangleIcon = styled.span`
-  display: none;
-  
-  @media (max-width: 600px) {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid black;
-    margin-left: 8px;
-  }
+const TriangleIcon = styled.span<{ $isOpen: boolean }>`
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 13.86px solid black;
+  margin-left: 8px;
+  transform: ${({ $isOpen }) => ($isOpen ? 'rotate(90deg)' : 'rotate(0deg)')};
+  transition: transform 0.3s ease-out;
 `;
 
 const appear = keyframes`
@@ -42,7 +40,6 @@ const appear = keyframes`
   }
 `;
 
-// Updated DropdownContent to use transient props (prefixing with $)
 const DropdownContent = styled.div<{ $isOpen: boolean }>`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
@@ -94,12 +91,16 @@ const PastTopicsDropdown: React.FC<PastTopicsDropdownProps> = ({ topics }) => {
     <DropdownContainer ref={dropdownRef}>
       <DropdownButton onClick={toggleDropdown}>
         Past Topics
-        <TriangleIcon />
+        <TriangleIcon $isOpen={isOpen} />
       </DropdownButton>
       <DropdownContent $isOpen={isOpen}>
-        {topics.map((topic, index) => (
-          <TopicItem key={index}>{topic}</TopicItem>
-        ))}
+        {topics.length === 0 ? (
+          <TopicItem>No past topics yet</TopicItem>
+        ) : (
+          topics.map((topic, index) => (
+            <TopicItem key={index}>{topic}</TopicItem>
+          ))
+        )}
       </DropdownContent>
     </DropdownContainer>
   );
