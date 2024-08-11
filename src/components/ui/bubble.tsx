@@ -22,23 +22,13 @@ const BubbleContainer = styled.div<{ $style?: React.CSSProperties }>`
   ${({ $style }) => $style && { ...$style }}; /* Apply transient style prop */
 `;
 
-const BubbleText = styled.div`
-  color: #333;
-  font-size: 2em; /* Scale the text relative to the container */
-  text-align: center;
-  word-wrap: break-word; /* Ensure long text wraps within the bubble */
-`;
-
 interface BubbleProps {
-  text: string;
   style?: React.CSSProperties;
 }
 
-const Bubble: React.FC<BubbleProps> = ({ text, style }) => {
+const Bubble: React.FC<BubbleProps> = ({ style }) => {
   return (
-    <BubbleContainer $style={style}>
-      <BubbleText>{text}</BubbleText>
-    </BubbleContainer>
+    <BubbleContainer $style={style} />
   );
 };
 

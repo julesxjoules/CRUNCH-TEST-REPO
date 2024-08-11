@@ -9,6 +9,7 @@ import PastTopicsDropdown from '@/components/ui/pasttopics';
 import UserMenu from '@/components/ui/usermenu';
 import Logo from '@/components/ui/logo';
 import { TypingHeading } from '@/components/ui/styledheader';
+import { buttongroup, CustomButton } from '@/components/ui/buttongroup';
 
 const OuterContainer = styled.div`
   display: flex;
@@ -41,7 +42,6 @@ const HeaderContent = styled.div`
   box-sizing: border-box;
   transition: padding 0.3s ease;
   position: relative;
-
   @media (max-width: 768px) {
     padding: 2vh 4vw;
   }
@@ -104,9 +104,9 @@ const ContentWrapper = styled.div`
 const MainContent = styled.main`
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: row; /* Align main body and button group side by side */
+  justify-content: space-between; /* Ensure button group is aligned to the right */
+  align-items: flex-start;
   padding: 2rem;
   width: 100%;
 `;
@@ -118,30 +118,6 @@ const MainBodyContainer = styled.div`
   width: 100%;
   height: auto;
   gap: 1rem;
-`;
-
-const LineGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-`;
-
-const Line = styled.div<{ thickness: number }>`
-  width: 100px;
-  height: ${({ thickness }) => thickness}px;
-  background-color: grey;
-`;
-
-const SentenceGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-`;
-
-const Sentence = styled.div<{ fontSize: number }>`
-  font-size: ${({ fontSize }) => fontSize}px;
 `;
 
 const Home: React.FC = () => {
@@ -179,7 +155,7 @@ const Home: React.FC = () => {
             <PastTopicsDropdown topics={pastTopics} />
           </LeftSection>
           <CenterSection>
-            <Logo/> {/* Added onClick to Logo */}
+            <Logo /> {/* Added onClick to Logo */}
           </CenterSection>
           <RightSection>
             <UserMenu options={userOptions} />
@@ -203,21 +179,20 @@ const Home: React.FC = () => {
                 />
                 {inputValue && <ClearInputButton onClick={handleClear}>✖</ClearInputButton>}
               </InputContainer>
-              <Bubble text="This is a large bubble" style={{ width: '30vw', height: '30vw' }} />
+
+              <Bubble style={{ width: '30vw', height: '30vw' }} />
+
               <ClearButton onClick={handleClear} />
             </MainBodyContainer>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
-              <LineGroup>
-                <Line thickness={2} />
-                <Line thickness={4} />
-                <Line thickness={6} />
-              </LineGroup>
-              <SentenceGroup>
-                <Sentence fontSize={14}>This is a small sentence.</Sentence>
-                <Sentence fontSize={18}>This is a medium sentence.</Sentence>
-                <Sentence fontSize={22}>This is a large sentence.</Sentence>
-              </SentenceGroup>
-            </div>
+            
+            {/* Integrated Button Group to the right */}
+            <buttongroup>
+              <CustomButton color="#E46B51" onClick={() => console.log('Button 1 action')}>Button 1</CustomButton>
+              <CustomButton color="#4E9FFF" onClick={() => console.log('Button 2 action')}>Button 2</CustomButton>
+              <CustomButton color="#CA5BDC" onClick={() => console.log('Button 3 action')}>Button 3</CustomButton>
+              <CustomButton color="#000000" onClick={() => console.log('Button 4 action')}>Button 4</CustomButton>
+              <CustomButton color="#5BB264" onClick={() => console.log('Button 5 action')}>Button 5</CustomButton>
+            </buttongroup>
           </MainContent>
         </ContentWrapper>
       </MainContainer>
