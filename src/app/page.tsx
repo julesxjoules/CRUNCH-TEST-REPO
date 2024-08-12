@@ -3,13 +3,11 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Bubble from '@/components/ui/bubble';
-import { ClearButton } from '@/components/ui/specializedButtons'; // Updated ClearButton import
 import { StyledInput, InputContainer, ClearButton as ClearInputButton } from '@/components/ui/styleinput';
 import PastTopicsDropdown from '@/components/ui/pasttopics';
 import UserMenu from '@/components/ui/usermenu';
 import Logo from '@/components/ui/logo';
 import { TypingHeading } from '@/components/ui/styledheader';
-import { CustomButtonGroup } from '@/components/ui/ButtonGroup'; // Use the correct case
 
 const OuterContainer = styled.div`
   display: flex;
@@ -155,7 +153,7 @@ const Home: React.FC = () => {
             <PastTopicsDropdown topics={pastTopics} />
           </LeftSection>
           <CenterSection>
-            <Logo/>
+            <Logo/> {/* Added onClick to Logo */}
           </CenterSection>
           <RightSection>
             <UserMenu options={userOptions} />
@@ -182,11 +180,8 @@ const Home: React.FC = () => {
 
               <Bubble style={{ width: '30vw', height: '30vw' }} />
 
-              <ClearButton onClick={handleClear} />
+              {/* Removed ClearButton and specialized buttons */}
             </MainBodyContainer>
-            
-            {/* Integrated Button Group to the right */}
-            <CustomButtonGroup />
           </MainContent>
         </ContentWrapper>
       </MainContainer>
