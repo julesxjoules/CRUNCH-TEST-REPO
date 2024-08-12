@@ -1,25 +1,20 @@
+// buttonGroup.tsx
 import styled from 'styled-components';
+import { PinButton, RefocusButton, CustomNoteButton, MorphButton, NextRoundButton } from './specializedButtons'; // Ensure the path is correct
 
-const buttongroup = styled.div`
+const ButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Align buttons to the right */
-  gap: 10px; /* Space between buttons */
+  align-items: flex-end;
+  gap: 10px;
 `;
 
-const CustomButton = styled.button<{ color: string }>`
-  background-color: ${({ color }) => color};
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px; /* Pill-shaped */
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    opacity: 0.8; /* Add hover effect */
-  }
-`;
-
-export { buttongroup, CustomButton };
+export const CustomButtonGroup = () => (
+  <ButtonGroup>
+    <PinButton />
+    <RefocusButton />
+    <CustomNoteButton />
+    <MorphButton />
+    <NextRoundButton />
+  </ButtonGroup>
+);
